@@ -6,7 +6,7 @@ from tqdm.asyncio import tqdm_asyncio
 from termcolor import cprint, colored
 import time
 from .utils import *
-from ..settings import min_market_cap, min_price, min_volume
+from ..settings import min_market_cap, min_price, max_price, min_volume
 
 # constants
 volume_xpath = "/html/body/main/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/barchart-table-scroll/table/tbody/tr[3]/td[5]"
@@ -18,7 +18,7 @@ print_status(process_name, process_stage, True)
 print_minimums(
     {
         "market cap": f"${min_market_cap:,.0f}",
-        "price": f"${min_price:,.2f}",
+        "price range": f"${min_price:,.2f} - ${max_price:,.2f}",
         "50-day average volume": f"{min_volume:,.0f} shares",
     }
 )
@@ -26,15 +26,29 @@ print_minimums(
 # record start time
 start = time.perf_counter()
 
-# logging data (printed to console after screen finishes)
-logs = []
+# Check if we can use cached results
+current_settings = get_current_settings()
+iteration_name = "liquidity"
 
-# retreive JSON data from previous screen iteration
-df = open_outfile("relative_strengths")
+if should_skip_iteration(iteration_name, current_settings):
+    print(colored("Using cached liquidity data from today...", "light_green"))
+    screened_df = open_outfile(iteration_name)
 
-# populate these lists while iterating through symbols
-successful_symbols = []
-failed_symbols = []
+    # Skip to the end
+    end = time.perf_counter()
+    cprint(f"{len(screened_df)} symbols loaded from cache.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()
+else:
+    # logging data (printed to console after screen finishes)
+    logs = []
+
+    # retreive JSON data from previous screen iteration
+    df = open_outfile("relative_strengths")
+
+    # populate these lists while iterating through symbols
+    successful_symbols = []
+    failed_symbols = []
 
 
 async def fetch_volume(symbol: str, session: ClientSession) -> int:
@@ -79,8 +93,8 @@ async def screen_liquidity(df_index: int, session: ClientSession) -> None:
         f"\n{symbol} | Market Cap: ${market_cap / 1000000000:.1f}B | Price: ${price:,.2f} | 50-day Avg. Volume: {volume:,.0f} shares\n"
     )
 
-    # filter out illiquid stocks
-    if (market_cap < min_market_cap) or (price < min_price) or (volume < min_volume):
+    # filter out illiquid stocks or stocks outside our price range
+    if (market_cap < min_market_cap) or (price < min_price) or (price > max_price) or (volume < min_volume):
         logs.append(filter_message(symbol))
         return
 
@@ -105,27 +119,31 @@ async def main() -> None:
         )
 
 
-print("Fetching liquidity data . . .\n")
-asyncio.run(main())
+if not should_skip_iteration(iteration_name, current_settings):
+    print("Fetching liquidity data . . .\n")
+    asyncio.run(main())
 
-# create a new dataframe with symbols which satisfied liquidity criteria
-screened_df = pd.DataFrame(successful_symbols)
+    # create a new dataframe with symbols which satisfied liquidity criteria
+    screened_df = pd.DataFrame(successful_symbols)
 
-# serialize data in JSON format and save on machine
-create_outfile(screened_df, "liquidity")
+    # serialize data in JSON format and save on machine
+    create_outfile(screened_df, "liquidity")
 
-# print log
-print("".join(logs))
+    # Mark this iteration as complete in the cache
+    mark_iteration_complete(iteration_name)
 
-# record end time
-end = time.perf_counter()
+    # print log
+    print("".join(logs))
 
-# print footer message to terminal
-cprint(f"{len(failed_symbols)} symbols failed (insufficient data).", "dark_grey")
-cprint(
-    f"{len(df) - len(screened_df) - len(failed_symbols)} symbols filtered (thinly traded or penny stock).",
-    "dark_grey",
-)
-cprint(f"{len(screened_df)} symbols passed.", "green")
-print_status(process_name, process_stage, False, end - start)
-print_divider()
+    # record end time
+    end = time.perf_counter()
+
+    # print footer message to terminal
+    cprint(f"{len(failed_symbols)} symbols failed (insufficient data).", "dark_grey")
+    cprint(
+        f"{len(df) - len(screened_df) - len(failed_symbols)} symbols filtered (outside price range ${min_price:.2f}-${max_price:.2f}, low market cap, or thinly traded).",
+        "dark_grey",
+    )
+    cprint(f"{len(screened_df)} symbols passed.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()

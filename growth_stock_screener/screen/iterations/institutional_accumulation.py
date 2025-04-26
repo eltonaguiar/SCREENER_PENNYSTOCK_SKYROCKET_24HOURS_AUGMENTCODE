@@ -24,20 +24,34 @@ print_status(process_name, process_stage, True)
 # record start time
 start = time.perf_counter()
 
-# logging data (printed to console after screen finishes)
-logs = []
+# Check if we can use cached results
+current_settings = get_current_settings()
+iteration_name = "institutional_accumulation"
 
-# retreive JSON data from previous screen iteration
-df = open_outfile("revenue_growth")
+if should_skip_iteration(iteration_name, current_settings):
+    print(colored("Using cached institutional accumulation data from today...", "light_green"))
+    screened_df = open_outfile(iteration_name)
 
-# populate these lists while iterating through symbols
-successful_symbols = []
-failed_symbols = []
-symbols_under_accumulation = []
-drivers = []
+    # Skip to the end
+    end = time.perf_counter()
+    cprint(f"{len(screened_df)} symbols loaded from cache.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()
+else:
+    # logging data (printed to console after screen finishes)
+    logs = []
 
-# store local thread data
-thread_local = threading.local()
+    # retreive JSON data from previous screen iteration
+    df = open_outfile("revenue_growth")
+
+    # populate these lists while iterating through symbols
+    successful_symbols = []
+    failed_symbols = []
+    symbols_under_accumulation = []
+    drivers = []
+
+    # store local thread data
+    thread_local = threading.local()
 
 
 def fetch_exchange(symbol: str) -> str:
@@ -65,7 +79,7 @@ def fetch_institutional_holdings(symbol: str) -> Dict[str, float]:
 
     if exchange is None:
         return None
-    
+
     # configure request url and dynamic wait methods
     url = f"https://www.marketbeat.com/stocks/{exchange}/{symbol}/institutional-ownership/"
 
@@ -117,7 +131,7 @@ def screen_institutional_accumulation(df_index: int) -> None:
 
         # add institutional holdings info to logs
         logs.append(
-            f"""\n{symbol} | Net Institutional Inflows (most recent Q): ${net_inflows:,.0f} 
+            f"""\n{symbol} | Net Institutional Inflows (most recent Q): ${net_inflows:,.0f}
             Inflows: ${holdings_data["Inflows"]:,.0f}, Outflows: ${holdings_data["Outflows"]:,.0f}\n"""
         )
 
@@ -152,37 +166,41 @@ def screen_institutional_accumulation(df_index: int) -> None:
     )
 
 
-# launch concurrent worker threads to execute the screen
-print("Fetching institutional holdings data . . .\n")
-tqdm_thread_pool_map(threads, screen_institutional_accumulation, range(0, len(df)))
+if not should_skip_iteration(iteration_name, current_settings):
+    # launch concurrent worker threads to execute the screen
+    print("Fetching institutional holdings data . . .\n")
+    tqdm_thread_pool_map(threads, screen_institutional_accumulation, range(0, len(df)))
 
-# close Selenium web driver sessions
-print("\nClosing browser instances . . .\n")
-for driver in tqdm(drivers):
-    driver.quit()
+    # close Selenium web driver sessions
+    print("\nClosing browser instances . . .\n")
+    for driver in tqdm(drivers):
+        driver.quit()
 
-# create a new dataframe with symbols which are under institutional accumulation
-screened_df = pd.DataFrame(successful_symbols)
+    # create a new dataframe with symbols which are under institutional accumulation
+    screened_df = pd.DataFrame(successful_symbols)
 
-# serialize data in JSON format and save on machine
-create_outfile(screened_df, "institutional_accumulation")
+    # serialize data in JSON format and save on machine
+    create_outfile(screened_df, "institutional_accumulation")
 
-# print log
-print("".join(logs))
+    # Mark this iteration as complete in the cache
+    mark_iteration_complete(iteration_name)
 
-# record end time
-end = time.perf_counter()
+    # print log
+    print("".join(logs))
 
-# print footer message to terminal
-cprint(f"{len(failed_symbols)} symbols failed (insufficient data).", "dark_grey")
-cprint(
-    f"{len(df) - len(failed_symbols) - len(symbols_under_accumulation)} symbols were not under institutional accumulation last quarter.",
-    "dark_grey",
-)
-cprint(
-    f"{len(symbols_under_accumulation)} symbols were under institutional accumulation last quarter.",
-    "green",
-)
-cprint(f"{len(screened_df)} symbols passed.", "green")
-print_status(process_name, process_stage, False, end - start)
-print_divider()
+    # record end time
+    end = time.perf_counter()
+
+    # print footer message to terminal
+    cprint(f"{len(failed_symbols)} symbols failed (insufficient data).", "dark_grey")
+    cprint(
+        f"{len(df) - len(failed_symbols) - len(symbols_under_accumulation)} symbols were not under institutional accumulation last quarter.",
+        "dark_grey",
+    )
+    cprint(
+        f"{len(symbols_under_accumulation)} symbols were under institutional accumulation last quarter.",
+        "green",
+    )
+    cprint(f"{len(screened_df)} symbols passed.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()

@@ -9,7 +9,7 @@ from tqdm import tqdm
 from termcolor import cprint, colored
 import time
 from .utils import *
-from ..settings import trend_settings, threads
+from ..settings import trend_settings, max_price, threads
 
 # constants
 timeout = 30
@@ -60,19 +60,33 @@ print("\n".join([trend_1, trend_2, trend_3]))
 # record start time
 start = time.perf_counter()
 
-# logging data (printed to console after screen finishes)
-logs = []
+# Check if we can use cached results
+current_settings = get_current_settings()
+iteration_name = "trend"
 
-# retreive JSON data from previous screen iteration
-df = open_outfile("liquidity")
+if should_skip_iteration(iteration_name, current_settings):
+    print(colored("Using cached trend data from today...", "light_green"))
+    screened_df = open_outfile(iteration_name)
 
-# populate these lists while iterating through symbols
-successful_symbols = []
-failed_symbols = []
-drivers = []
+    # Skip to the end
+    end = time.perf_counter()
+    cprint(f"{len(screened_df)} symbols loaded from cache.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()
+else:
+    # logging data (printed to console after screen finishes)
+    logs = []
 
-# store local thread data
-thread_local = threading.local()
+    # retreive JSON data from previous screen iteration
+    df = open_outfile("liquidity")
+
+    # populate these lists while iterating through symbols
+    successful_symbols = []
+    failed_symbols = []
+    drivers = []
+
+    # store local thread data
+    thread_local = threading.local()
 
 
 def fetch_moving_averages(symbol: str) -> Dict[str, float]:
@@ -147,15 +161,50 @@ def screen_trend(df_index: int) -> None:
     row = df.iloc[df_index]
 
     symbol = row["Symbol"]
-    trend_data = fetch_moving_averages(symbol)
-    high_52_week = fetch_52_week_high(symbol)
+    price = row["Price"]
 
-    # check for failed GET requests
-    if (trend_data is None) or (high_52_week is None):
-        failed_symbols.append(symbol)
+    # Since we've relaxed all trend settings except the 52-week high,
+    # we'll only check that one and pass through stocks that meet our price criteria
+    trend_data = None
+    high_52_week = None
+
+    # Try to fetch trend data, but don't fail if we can't get it
+    try:
+        trend_data = fetch_moving_averages(symbol)
+    except Exception as e:
+        logs.append(skip_message(symbol, f"Error fetching moving averages: {e}"))
+
+    try:
+        high_52_week = fetch_52_week_high(symbol)
+    except Exception as e:
+        logs.append(skip_message(symbol, f"Error fetching 52-week high: {e}"))
+
+    # For stocks under $4, we're more interested in growth potential than current trend
+    # So we'll be more lenient with trend criteria
+
+    # If we couldn't get trend data, we'll still include the stock if it's under $4
+    if trend_data is None or high_52_week is None:
+        # For stocks we can't get trend data for, we'll still include them
+        # if they meet our price criteria (under $4)
+        if price <= max_price:
+            logs.append(f"\n{symbol} | Price: ${price:.2f} | Including despite missing trend data\n")
+            successful_symbols.append(
+                {
+                    "Symbol": symbol,
+                    "Company Name": row["Company Name"],
+                    "Industry": row["Industry"],
+                    "RS": row["RS"],
+                    "Price": price,
+                    "Market Cap": row["Market Cap"],
+                    "50-day Average Volume": row["50-day Average Volume"],
+                    "% Below 52-week High": None,  # We don't have this data
+                }
+            )
+        else:
+            failed_symbols.append(symbol)
         return
 
-    price = row["Price"]
+    # If we have trend data, we'll use it
     sma_10 = trend_data["10-day SMA"]
     sma_20 = trend_data["20-day SMA"]
     sma_50 = trend_data["50-day SMA"]
@@ -201,33 +250,37 @@ def screen_trend(df_index: int) -> None:
     )
 
 
-# launch concurrent worker threads to execute the screen
-print("\nFetching trend data . . .\n")
-tqdm_thread_pool_map(threads, screen_trend, range(0, len(df)))
+if not should_skip_iteration(iteration_name, current_settings):
+    # launch concurrent worker threads to execute the screen
+    print("\nFetching trend data . . .\n")
+    tqdm_thread_pool_map(threads, screen_trend, range(0, len(df)))
 
-# close Selenium web driver sessions
-print("\nClosing browser instances . . .\n")
-for driver in tqdm(drivers):
-    driver.quit()
+    # close Selenium web driver sessions
+    print("\nClosing browser instances . . .\n")
+    for driver in tqdm(drivers):
+        driver.quit()
 
-# create a new dataframe with symbols which satisfied trend criteria
-screened_df = pd.DataFrame(successful_symbols)
+    # create a new dataframe with symbols which satisfied trend criteria
+    screened_df = pd.DataFrame(successful_symbols)
 
-# serialize data in JSON format and save on machine
-create_outfile(screened_df, "trend")
+    # serialize data in JSON format and save on machine
+    create_outfile(screened_df, "trend")
 
-# print log
-print("".join(logs))
+    # Mark this iteration as complete in the cache
+    mark_iteration_complete(iteration_name)
 
-# record end time
-end = time.perf_counter()
+    # print log
+    print("".join(logs))
 
-# print footer message to terminal
-cprint(f"{len(failed_symbols)} symbols failed (insufficient data).", "dark_grey")
-cprint(
-    f"{len(df) - len(screened_df) - len(failed_symbols)} symbols filtered (not in stage-2 uptrend).",
-    "dark_grey",
-)
-cprint(f"{len(screened_df)} symbols passed.", "green")
-print_status(process_name, process_stage, False, end - start)
-print_divider()
+    # record end time
+    end = time.perf_counter()
+
+    # print footer message to terminal
+    cprint(f"{len(failed_symbols)} symbols failed (insufficient data).", "dark_grey")
+    cprint(
+        f"{len(df) - len(screened_df) - len(failed_symbols)} symbols filtered (not in stage-2 uptrend).",
+        "dark_grey",
+    )
+    cprint(f"{len(screened_df)} symbols passed.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()

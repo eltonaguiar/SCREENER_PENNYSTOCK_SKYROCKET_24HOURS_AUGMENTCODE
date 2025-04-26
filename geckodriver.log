@@ -1,0 +1,221 @@
+1745622499683	geckodriver	INFO	Listening on 127.0.0.1:59761
+1745622501763	geckodriver	INFO	Listening on 127.0.0.1:59827
+1745622503875	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "598 ... 8" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\ru1745622504657	geckodriver	INFO	Listening on 127.0.0.1:59857
+1745622507731	geckodriver	INFO	Listening on 127.0.0.1:59880
+1745622509997	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "598 ... 1" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofileI78yhd"
+1745622511295	geckodriver	INFO	Listeninconsole.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745622524020	Marionette	INFO	Marionette enabled
+1745622524445	Marionette	INFO	Listening on port 60074
+WebDriver BiDi listening on ws://127.0.0.1:59877
+Read port: 60074
+1745622524938	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+1745623470101	Marionette	INFO	Stopped listening on port 60074
+Dynamically enable window occlusion 1
+9fk5qm03as8o7dmsb30.apps.googleusercontent.com&ux_mode=popup&ui_mode=card&as=sAU_5feStTQmqwW1dk5Vlg&is_itp=true&channel_id=7de93b0cb986eb7281ee5cb472bf1813f591708cb96a5d35fc85a4a810298223&oriconsole.warn: WindowsJumpLists: "Failed to fetch favicon for1745623468521	Marionette	INFO	Stopped listening on port 59989
+Dynamically enable window occlusion 1
+topped listening on port 59967
+Dynamically enable window occlusion 1
+eDYC1MjIyTSJ2HfQpEnltEA/m=credential_server_library:221:464
+Ji@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic-kM/d=1/rs=AF0KOtUOodZeDYC1MjIyTSJ2HfQpEnltEA/m=credential_server_library:220:454
+Ei@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic-kM/d=1/rs=AF0KOtUOodZeDYC1MjIyTSJ2HfQpEnltEA/m=credential_server_library:220:410
+Fi/<@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic-kM/d=1/rs=AF0KOtUOodZeDYC1MjIyTSJ2HfQpEnltEA/m=credential_server_library:213:312
+
+1745623463623	Marionette	INFO	Stopped listening on port 59935
+Dynamically enable window occlusion 1
+1745692551899	geckodriver	INFO	Listening on 127.0.0.1:51910
+1745692554035	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "519 ... 3" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofilehOZES1"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745692558743	Marionette	INFO	Marionette enabled
+1745692559243	Marionette	INFO	Listening on port 52001
+WebDriver BiDi listening on ws://127.0.0.1:51917
+Read port: 52001
+1745692559696	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1745694768938	geckodriver	INFO	Listening on 127.0.0.1:55070
+1745694770963	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "550 ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofilerVYLhE"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745694776983	Marionette	INFO	Marionette enabled
+1745694777757	Marionette	INFO	Listening on port 55187
+WebDriver BiDi listening on ws://127.0.0.1:55075
+Read port: 55187
+1745694778169	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1745695050412	geckodriver	INFO	Listening on 127.0.0.1:55701
+1745695052441	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "557 ... 2" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofileEIn3s4"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745695058178	Marionette	INFO	Marionette enabled
+1745695058708	Marionette	INFO	Listening on port 55819
+WebDriver BiDi listening on ws://127.0.0.1:55712
+Read port: 55819
+1745695059197	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+1745696208472	Marionette	INFO	Stopped listening on port 55797
+Dynamically enable window occlusion 1
+SDAQ-EPOW/technicals/" ({})
+1745696203118	Marionette	INFO	Stopped listening on port 55750
+Dynamically enable window occlusion 1
+7ae0719283c60731cde8d872b41ea889994302a61f171ca36d1e8d15&origin=https%3A%2F%2Fwww.tradingview.com&oauth2_auth_url=https%3A%2F%2Faccounts.google.com%2Fo%2Foauth2%2Fv2%2Fauth, line 221: Script terminated by timeout at:
+Ki@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic2ks/d=1/rs=AF0KOtWWePm-bpnamYZq1M7AK_xpHu08iA/m=credential_server_library:221:464
+Ji@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic2ks/d=1/rs=AF0KOtWWePm-bpnamYZq1M7AK_xpHu08iA/m=credential_server_library:220:454
+Ei@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic2ks/d=1/rs=AF0KOtWWePm-bpnamYZq1M7AK_xpHu08iA/m=credential_server_library:220:410
+Fi/<@/_/gsi/_/js/k=gsi.gsi.en_US.GiJ097K-KZM.O/am=AAAic2ks/d=1/rs=AF0KOtWWePm-bpnamYZq1M7AK_xpHu08iA/m=credential_server_library:213:312
+
+1745696210213	Marionette	INFO	Stopped listening on port 55819
+Dynamically enable window occlusion 1
+1745696236804	geckodriver	INFO	Listening on 127.0.0.1:57928
+1745696238835	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "579 ... 9" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofileWMtm1C"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745696243445	Marionette	INFO	Marionette enabled
+1745696243836	Marionette	INFO	Listening on port 58022
+WebDriver BiDi listening on ws://127.0.0.1:57937
+Read port: 58022
+1745696244475	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default f*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+DynaJavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 24: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/kLp1wZtyR2cl6iKecfHpV0vkPc8de5KeCPhMdHbgSC0.js line 2 > eval line 7769 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error:JavaScript warning: https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js, line 80: Script terminated by timeout at:
+n.unsubscribe@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:80:657
+gd.prototype.unsubscribe@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:90:1369
+n.unsubscribe@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:356
+n.unsubscribe@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:80:709
+gd.prototype.unsubscribe@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:90:1369
+Ud/</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:96:1524
+gd/this.Ed@https://pagead2.googlesyndication.com/pagead/managed/js/activeviewJavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 2289: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 2289: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 2289: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 2289: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 2289: unreachable code aJavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 6835: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 6835: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 6835: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 6835: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 6835: unreachable code after return statement
+JavaScript warning: https://paJavaScript warning: https://pagead2.googlesyndication.com/bg/kLp1wZtyR2cl6iKecfHpV0vkPc8de5KeCPhMdHbgSC0.js line 2 > eval line 463 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+ebug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+syndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 6169: unreachable code after return statementJavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+ment
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 6169: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 4740: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 4740: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 6169: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 6169: unreachable code after return statement
+JavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 558: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 558: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 558: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 558: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 558: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 558: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 558: unreachable code after return statement
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1745696564690	geckodriver	INFO	Listening on 127.0.0.1:58880
+1745696566785	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "588 ... 8" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofilewzK4T8"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745696589572	Marionette	INFO	Marionette enabled
+1745696589880	Marionette	INFO	Listening on port 59266
+WebDriver BiDi listening on ws://127.0.0.1:58881
+Read port: 59266
+1745696590372	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+JavaScript error: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9373162611283935, line 92: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 4004: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/kLp1wZtyR2cl6iKecfHpV0vkPc8de5KeCPhMdHbgSC0.js line 2 > eval line 6731 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+dth=0
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 3223: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 3223: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 3223: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js, line 3223: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 3223: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 3223: unreachable code after return statement
+JavaScript warning: https://pagead2.googlesyndication.com/bg/73P3AuuroUYNbYb8E4MKu1IbZgOvu0M6pu8QD6i5zXE.js line 2 > eval, line 3223: unreachable code after return statement
+JExiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.

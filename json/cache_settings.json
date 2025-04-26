@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "min_rs": 80,
+    "min_market_cap": 10000000,
+    "min_price": 0.2,
+    "max_price": 4.0,
+    "min_volume": 10000,
+    "trend_settings": {
+      "Price >= 50-day SMA": false,
+      "Price >= 200-day SMA": false,
+      "10-day SMA >= 20-day SMA": false,
+      "20-day SMA >= 50-day SMA": false,
+      "Price within 50% of 52-week High": true
+    },
+    "min_growth_percent": 20,
+    "protected_rs": 90,
+    "threads": 6
+  },
+  "settings_hash": "b6e9e198c94be54f496de90fc2287f79",
+  "timestamp": "2025-04-26",
+  "iterations_completed": [
+    "nasdaq_listings",
+    "relative_strengths",
+    "liquidity",
+    "trend",
+    "revenue_growth"
+  ]
+}

@@ -25,19 +25,33 @@ print(
 # record start time
 start = time.perf_counter()
 
-# logging data (printed to console after screen finishes)
-logs = []
+# Check if we can use cached results
+current_settings = get_current_settings()
+iteration_name = "revenue_growth"
 
-# retreive JSON data from previous screen iteration
-df = open_outfile("trend")
+if should_skip_iteration(iteration_name, current_settings):
+    print(colored("Using cached revenue growth data from today...", "light_green"))
+    screened_df = open_outfile(iteration_name)
 
-# populate these lists while iterating through symbols
-successful_symbols = []
-failed_symbols = []
+    # Skip to the end
+    end = time.perf_counter()
+    cprint(f"{len(screened_df)} symbols loaded from cache.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()
+else:
+    # logging data (printed to console after screen finishes)
+    logs = []
 
-# fetch revenue data for all symbols
-symbol_list = [] if ("Symbol" not in df) else list(df["Symbol"])
-revenue_data = fetch_all_revenues(symbol_list)
+    # retreive JSON data from previous screen iteration
+    df = open_outfile("trend")
+
+    # populate these lists while iterating through symbols
+    successful_symbols = []
+    failed_symbols = []
+
+    # fetch revenue data for all symbols
+    symbol_list = [] if ("Symbol" not in df) else list(df["Symbol"])
+    revenue_data = fetch_all_revenues(symbol_list)
 
 
 def revenue_growth(timeframe: str, df: pd.DataFrame) -> Dict[str, float]:
@@ -157,31 +171,35 @@ def screen_revenue_growth(df_index: int) -> None:
     )
 
 
-# screen each stock present in the DataFrame
-print("\nScreening stocks . . .\n")
-for i in tqdm(range(0, len(df))):
-    screen_revenue_growth(i)
+if not should_skip_iteration(iteration_name, current_settings):
+    # screen each stock present in the DataFrame
+    print("\nScreening stocks . . .\n")
+    for i in tqdm(range(0, len(df))):
+        screen_revenue_growth(i)
 
-# create a new dataframe with symbols which satisfied revenue_growth criteria
-screened_df = pd.DataFrame(successful_symbols)
+    # create a new dataframe with symbols which satisfied revenue_growth criteria
+    screened_df = pd.DataFrame(successful_symbols)
 
-# serialize data in JSON format and save on machine
-create_outfile(screened_df, "revenue_growth")
+    # serialize data in JSON format and save on machine
+    create_outfile(screened_df, "revenue_growth")
 
-# print log
-print("".join(logs))
+    # Mark this iteration as complete in the cache
+    mark_iteration_complete(iteration_name)
 
-# record end time
-end = time.perf_counter()
+    # print log
+    print("".join(logs))
 
-# print footer message to terminal
-cprint(
-    f"{len(failed_symbols)} symbols failed (insufficient revenue reports).", "dark_grey"
-)
-cprint(
-    f"{len(df) - len(screened_df) - len(failed_symbols)} symbols filtered (revenue growth too low or foreign stock).",
-    "dark_grey",
-)
-cprint(f"{len(screened_df)} symbols passed.", "green")
-print_status(process_name, process_stage, False, end - start)
-print_divider()
+    # record end time
+    end = time.perf_counter()
+
+    # print footer message to terminal
+    cprint(
+        f"{len(failed_symbols)} symbols failed (insufficient revenue reports).", "dark_grey"
+    )
+    cprint(
+        f"{len(df) - len(screened_df) - len(failed_symbols)} symbols filtered (revenue growth too low or foreign stock).",
+        "dark_grey",
+    )
+    cprint(f"{len(screened_df)} symbols passed.", "green")
+    print_status(process_name, process_stage, False, end - start)
+    print_divider()

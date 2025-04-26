@@ -3,25 +3,26 @@ import multiprocessing
 # ITERATIONS (modify these values as desired)
 
 # Iteration 1: Relative Strength
-min_rs: int = 90  # minimum RS rating to pass (integer from 0-100)
+min_rs: int = 80  # minimum RS rating to pass (integer from 0-100) - lowered to include more candidates
 
 # Iteration 2: Liquidity
-min_market_cap: float = 1000000000  # minimum market cap (USD)
-min_price: float = 10               # minimum price (USD)
-min_volume: int = 100000            # minimum 50-day average volume
+min_market_cap: float = 10000000   # minimum market cap (USD) - lowered to $10M to include more micro-cap companies
+min_price: float = 0.20            # minimum price (USD) - lowered to $0.20 to include more penny stocks
+max_price: float = 4.00            # maximum price (USD) - kept at $4
+min_volume: int = 10000            # minimum 50-day average volume - lowered to include more thinly traded stocks
 
 # Iteration 3: Trend
 trend_settings = {
-    "Price >= 50-day SMA": True,               # set values to 'True' or 'False'
-    "Price >= 200-day SMA": True,              # ^
-    "10-day SMA >= 20-day SMA": True,          # ^ 
-    "20-day SMA >= 50-day SMA": True,          # ^
-    "Price within 50% of 52-week High": True,  # ^
+    "Price >= 50-day SMA": False,              # set values to 'True' or 'False' - relaxed to include stocks in pullbacks
+    "Price >= 200-day SMA": False,             # ^ - relaxed to allow for newer breakouts
+    "10-day SMA >= 20-day SMA": False,         # ^ - relaxed to include stocks in consolidation
+    "20-day SMA >= 50-day SMA": False,         # ^ - relaxed to include stocks in consolidation
+    "Price within 50% of 52-week High": True,  # ^ - kept to ensure stocks aren't too far from highs
 }
 
 # Iteration 4: Revenue Growth
-min_growth_percent: float = 25  # minimum revenue growth for a quarter compared to the same quarter 1 year ago (percentage)
-protected_rs: int = 97          # minimum RS rating to bypass revenue screen iteration (see README)
+min_growth_percent: float = 20  # minimum revenue growth for a quarter compared to the same quarter 1 year ago (percentage) - lowered to include more candidates
+protected_rs: int = 90          # minimum RS rating to bypass revenue screen iteration (see README) - lowered to include more candidates
 
 # Iteration 5: Institutional Accumulation
 # (no parameters to modify)
