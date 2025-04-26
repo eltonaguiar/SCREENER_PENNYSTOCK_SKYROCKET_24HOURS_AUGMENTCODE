@@ -8,6 +8,7 @@ from termcolor import colored
 import requests
 import json
 from .outfiles import open_outfile
+from .skyrocket import calculate_skyrocket_score, generate_top_10_html # Import new functions
 
 def analyze_symbols():
     """
@@ -49,6 +50,7 @@ def analyze_symbols():
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Stock Analysis Report</title>
         <style>
+            /* General Styles */
             body {
                 font-family: Arial, sans-serif;
                 line-height: 1.6;
@@ -74,6 +76,36 @@ def analyze_symbols():
                 margin-bottom: 20px;
                 border-left: 5px solid #3498db;
             }
+            /* Skyrocket Summary Styles */
+            .skyrocket-summary {
+                background-color: #eaf5ff; /* Light blue background */
+                padding: 15px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                border-left: 5px solid #2980b9; /* Darker blue border */
+            }
+            .skyrocket-summary h2 {
+                margin-top: 0;
+                color: #2c3e50;
+            }
+            .skyrocket-summary ol {
+                list-style-position: inside;
+                padding-left: 10px; /* Indent list */
+            }
+            .skyrocket-summary li {
+                margin-bottom: 0.8em;
+                padding: 0.4em 0;
+                border-left: none; /* Remove individual item border */
+                background-color: transparent; /* No background for items */
+            }
+            .skyrocket-summary strong {
+                color: #0056b3;
+            }
+            .skyrocket-summary p small {
+                color: #7f8c8d;
+                font-style: italic;
+            }
+            /* Stock Card Styles */
             .stock-card {
                 background-color: #fff;
                 border: 1px solid #ddd;
@@ -176,11 +208,17 @@ def analyze_symbols():
             </ul>
         </div>
 
-        <h2>Stock Analysis</h2>
+        <!-- Placeholder for Skyrocket Summary - will be added dynamically -->
+
+        <h2>Detailed Stock Analysis</h2>
     """)
 
     # Get detailed data for each symbol
     symbols = df['Symbol'].tolist()
+
+    # Add columns for Skyrocket Score and Reason
+    df['Skyrocket Score'] = np.nan
+    df['Skyrocket Reason'] = ''
 
     # Fetch data for all symbols at once
     end_date = datetime.now()
@@ -320,6 +358,28 @@ def analyze_symbols():
                     print(colored(f"Error getting financial metrics for {symbol}: {e}", "yellow"))
                     revenue_growth = earnings_growth = pe_ratio = forward_pe = peg_ratio = profit_margins = None
                     inst_ownership = target_price = target_high = target_low = upside_potential = None
+
+                # Calculate Skyrocket Score
+                try:
+                    # Pass the relevant parts of historical_data
+                    symbol_historical_data = None
+                    if historical_data is not None and not historical_data.empty:
+                        # Check if multi-level index (multiple symbols) or single
+                        if isinstance(historical_data.columns, pd.MultiIndex):
+                            if symbol in historical_data.columns.get_level_values(1):
+                                symbol_historical_data = historical_data.loc[:, pd.IndexSlice[:, symbol]]
+                                # Rename columns to remove symbol level for consistency
+                                symbol_historical_data.columns = symbol_historical_data.columns.droplevel(1)
+                        elif symbol in historical_data.columns: # Single symbol case (less likely here)
+                            symbol_historical_data = historical_data
+
+                    score, reason = calculate_skyrocket_score(symbol_row, info, symbol_historical_data)
+                    df.loc[df['Symbol'] == symbol, 'Skyrocket Score'] = score
+                    df.loc[df['Symbol'] == symbol, 'Skyrocket Reason'] = reason
+                except Exception as score_e:
+                    print(colored(f"Error calculating Skyrocket Score for {symbol}: {score_e}", "yellow"))
+                    df.loc[df['Symbol'] == symbol, 'Skyrocket Score'] = 0
+                    df.loc[df['Symbol'] == symbol, 'Skyrocket Reason'] = "Error during scoring"
 
                 # Create the HTML for this stock
                 # Format the current price
@@ -628,6 +688,38 @@ def analyze_symbols():
             except Exception as e:
                 print(colored(f"Error analyzing {symbol}: {e}", "red"))
                 continue
+
+        # Generate and Insert Top 10 Skyrocket HTML after the loop
+        try:
+            top_10_html = generate_top_10_html(df)
+            # Find the index of the initial summary div closing tag in html_content
+            summary_end_index = -1
+            for i, content in enumerate(html_content):
+                if '</div>' in content and '<div class="summary">' in html_content[i-1] if i > 0 else False: # A bit fragile, assumes structure
+                    summary_end_index = i
+                    break
+                # More robust check if the above fails
+                if '<!-- Placeholder for Skyrocket Summary -->' in content:
+                    summary_end_index = i
+                    break
+
+            if summary_end_index != -1:
+                # Insert the top_10_html after the summary div
+                html_content.insert(summary_end_index + 1, top_10_html)
+                # Remove the placeholder comment if it exists
+                html_content = [line for line in html_content if '<!-- Placeholder for Skyrocket Summary -->' not in line]
+
+            else:
+                # Fallback: Insert before the "Detailed Stock Analysis" header if placeholder not found
+                for i, content in enumerate(html_content):
+                    if '<h2>Detailed Stock Analysis</h2>' in content:
+                        html_content.insert(i, top_10_html)
+                        break
+                else: # If header not found either, append before footer
+                     html_content.insert(-1, top_10_html) # Insert before the last element (footer)
+
+        except Exception as top10_e:
+            print(colored(f"Error generating Top 10 Skyrocket HTML: {top10_e}", "red"))
 
         # Add the footer and close the HTML
         html_content.append("""
