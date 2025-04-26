@@ -13,3 +13,17 @@ Read port: 53632
 console.error: ({})
 1745694243035	Marionette	INFO	Stopped listening on port 53632
 Dynamically enable window occlusion 1
+1745697125718	geckodriver	INFO	Listening on 127.0.0.1:59941
+1745697127771	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "599 ... 6" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\zerou\\AppData\\Local\\Temp\\rust_mozprofileBZ5Ghx"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1745697134215	Marionette	INFO	Marionette enabled
+1745697134768	Marionette	INFO	Listening on port 60037
+WebDriver BiDi listening on ws://127.0.0.1:59946
+Read port: 60035
+1745697135319	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.tradingview.com/symbols/NASDAQ-CRVS/technicals/" ({})
